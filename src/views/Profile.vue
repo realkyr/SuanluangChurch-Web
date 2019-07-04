@@ -25,12 +25,14 @@
       </v-flex>
       <FileList />
     </v-container>
+    <Footer />
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import FileList from '@/components/Profile/FileList'
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -38,7 +40,8 @@ import 'firebase/auth'
 export default {
   components: {
     Navbar,
-    FileList
+    FileList,
+    Footer
   },
   mounted () {
     this.initUser()

@@ -31,7 +31,7 @@
           <span class="subheader font-weight-medium">{{ item.name }}</span>
         </v-flex>
         <v-flex xs2>
-          <span class="subheader">{{ item.uploaded_date }}</span>
+          <span class="subheader">{{ item.uploaded_date ? item.uploaded_date : 'unknown' }}</span>
         </v-flex>
         <v-flex xs1>
           <v-chip class="check-icon" color="green" text-color="white"><v-icon>check</v-icon></v-chip>
@@ -42,21 +42,39 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
-      files: {
-        id: {
-          id: 'hi',
-          name: 'asdf.pdf',
-          uploaded_date: '2019-07-02'
-        },
-        id2: {
-          id: 'hi2',
-          name: 'asdfasdf.pdf',
-          uploaded_date: '2019-07-02'
+      files: {}
+    }
+  },
+  computed: {
+    ...mapState([
+      'user'
+    ])
+  },
+  watch: {
+    user: {
+      async handler (val, oldVal) {
+        let exp = val.uid !== 'pending' && val.uid !== ''
+        if (exp) {
+          console.log('get again')
+          const db = firebase.firestore()
+          const ref = db.collection('users').doc(this.user.uid).collection('files')
+          const querySnapshots = await ref.get()
+          for (let doc of querySnapshots.docs) {
+            this.files = {
+              ...this.files,
+              [doc.id]: doc.data()
+            }
+          }
         }
-      }
+      },
+      deep: true
     }
   }
 }

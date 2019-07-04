@@ -2,7 +2,7 @@
   <div>
     <Navbar/>
     <v-container>
-      <v-layout justify-center align-center>
+      <v-layout style="height: 60vh;" justify-center align-center>
         <v-flex xs12 sm10 md8>
           <v-card class="login-card">
             <!-- <h4 class="display-2 font-weight-medium">เข้าสู่ระบบ</h4> -->
@@ -37,17 +37,20 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import FacebookLogin from '@/components/LoginPage/FacebookLogin'
 
 export default {
   components: {
     Navbar,
-    FacebookLogin
+    FacebookLogin,
+    Footer
   },
   data () {
     return {
