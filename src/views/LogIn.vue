@@ -5,8 +5,8 @@
       <v-layout justify-center align-center>
         <v-flex xs12 sm10 md8>
           <v-card class="login-card">
-            <h3 class="display-2 font-weight-medium">เข้าสู่ระบบ</h3>
-            <form>
+            <!-- <h4 class="display-2 font-weight-medium">เข้าสู่ระบบ</h4> -->
+            <!-- <form>
               <v-text-field
                 v-model="email"
                 :error-messages="emailErrors"
@@ -26,10 +26,10 @@
               ></v-text-field>
 
               <v-btn style="width: 100%;">Log In</v-btn>
-            </form>
-            <div style="width: 100%; height: 10px; border-bottom: 1px solid grey; text-align: center">
+            </form> -->
+            <div style="margin-bottom: 10px; width: 100%; height: 10px; border-bottom: 1px solid grey; text-align: center">
               <span style="font-size: 14px; background-color: white; padding: 0 10px;">
-                or <!--Padding is optional-->
+                เข้าสู่ระบบ
               </span>
             </div>
             <FacebookLogin />

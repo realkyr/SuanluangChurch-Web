@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import FacebookLogo from './FacebookIcon.vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -20,15 +21,7 @@ export default {
     FacebookLogo
   },
   mounted () {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in.
-        this.$router.push('/profile')
-      } else {
-        // No user is signed in.
-        console.log('user is not signed in')
-      }
-    })
+    this.initUser()
   },
   methods: {
     async loginWithFacebook () {
@@ -36,15 +29,33 @@ export default {
       const provider = new firebase.auth.FacebookAuthProvider()
       try {
         let result = await firebase.auth().signInWithPopup(provider)
-        let token = result.credential.accessToken
         // The signed-in user info.
         let { user } = result
-        // ...
-        console.log({ token, user })
+
+        // map data to Vuex
+        this.setUseruid(user.uid)
+        this.setUserdname(user.displayName)
+        this.setUserPhotoUrl(user.photoURL + '?height=200')
         this.$router.push('/profile')
       } catch (error) {
         console.log(error)
       }
+    },
+    ...mapActions([
+      'setUserdname',
+      'setUserPhotoUrl',
+      'setUseruid',
+      'initUser'
+    ])
+  },
+  computed: {
+    uid () {
+      return this.$store.state.user.uid
+    }
+  },
+  watch: {
+    uid (newUser, oldUser) {
+      if (newUser !== 'pending' && newUser !== '') this.$router.push('/profile')
     }
   }
 }

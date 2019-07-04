@@ -6,37 +6,37 @@
 
       <v-spacer></v-spacer>
 
+      <v-toolbar-title style="margin-right: 10px;">
+        Welcome! {{ user.dname ? user.dname : 'Guest'}}
+      </v-toolbar-title>
+
       <v-avatar class="avatar" color="white">
-        <font-awesome-icon
-          :style="{ color: 'black' }"
-          :prefix="'far'"
-          :icon="'fa-user'"
-        />
-        <img v-if="photoUrl" :src="photoUrl" alt="avatar">
+        <i v-if="isNoPhoto" style="color: black;" class="fas fa-user"></i>
+        <img v-if="!isNoPhoto" :src="user.photoUrl" alt="avatar">
       </v-avatar>
     </v-toolbar>
   </div>
 </template>
 
 <script>
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   mounted () {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in.
-        console.log(user)
-        this.photoUrl = user.photoURL + '?height=100'
-      } else {
-        // No user is signed in.
-      }
-    })
+    this.initUser(true)
   },
-  data () {
-    return {
-      photoUrl: ''
+  methods: {
+    ...mapActions([
+      'initUser'
+    ])
+  },
+  computed: {
+    ...mapState([
+      // map this.count to store.state.count
+      'user'
+    ]),
+    isNoPhoto () {
+      return this.user.photoUrl === '' || this.user.photoUrl === 'pending'
     }
   }
 }
