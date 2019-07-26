@@ -32,6 +32,7 @@
                 เข้าสู่ระบบ
               </span>
             </div>
+            <v-btn @click="anonymousSignIn" style="width: 100%">เข้าสู่ระบบชั่วคราว</v-btn>
             <FacebookLogin />
           </v-card>
         </v-flex>
@@ -42,6 +43,9 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+import 'firebase/auth'
+
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FacebookLogin from '@/components/LoginPage/FacebookLogin'
@@ -64,6 +68,10 @@ export default {
   methods: {
     showPassTrigger () {
       this.passwordShow = !this.passwordShow
+    },
+    async anonymousSignIn () {
+      await firebase.auth().signInAnonymously()
+      this.$router.push('/profile')
     }
   }
 }
