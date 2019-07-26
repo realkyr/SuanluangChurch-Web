@@ -69,6 +69,8 @@ import Navbar from '@/components/Navbar'
 import { mapState } from 'vuex'
 import { setTimeout } from 'timers'
 
+import moment from 'moment'
+
 export default {
   components: {
     Navbar
@@ -132,7 +134,8 @@ export default {
         size: this.uploadTask.snapshot.totalBytes,
         path: this.uploadTask.snapshot.ref.fullPath,
         name: this.uploadTask.snapshot.ref.name,
-        public: true
+        public: true,
+        uploaded_date: moment().format('YYYY-MM-DD')
       })
       this.uploadTask = null
       this.success = true

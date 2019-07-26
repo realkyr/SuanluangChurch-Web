@@ -10,7 +10,7 @@
         Welcome! {{ user.dname ? user.dname : 'Guest'}}
       </v-toolbar-title>
 
-      <v-avatar class="avatar" color="white">
+      <v-avatar @click="$router.push('/profile')" class="avatar" color="white">
         <i v-if="isNoPhoto" style="color: black;" class="fas fa-user"></i>
         <img v-if="!isNoPhoto" :src="user.photoUrl" alt="avatar">
       </v-avatar>

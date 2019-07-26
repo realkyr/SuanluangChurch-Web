@@ -4,6 +4,7 @@
       <v-layout row wrap>
         <v-flex xs6>
           <v-text-field
+            v-model="filter"
             label="Search"
             placeholder="search by file name"
             prepend-icon="search"
@@ -19,22 +20,23 @@
         <v-flex xs2>
           <span class="title">File Name</span>
         </v-flex>
-        <v-flex xs2>
-          <span class="title">Uploaded Date</span>
+        <v-flex xs4>
+          <span class="title">Uploaded Date (ปี - เดือน - วัน)</span>
         </v-flex>
-        <v-flex xs1>
-          <span class="title">Public</span>
+        <v-flex xs2>
+          <span class="title">View Detail</span>
         </v-flex>
       </v-layout>
-      <v-layout row wrap align-center justify-space-between :key="item.id" v-for="item in files">
+      <v-layout row wrap align-center justify-space-between :key="item.id" v-for="item in filteredFiles">
         <v-flex xs2>
           <span class="subheader font-weight-medium">{{ item.name }}</span>
         </v-flex>
-        <v-flex xs2>
+        <v-flex xs4>
           <span class="subheader">{{ item.uploaded_date ? item.uploaded_date : 'unknown' }}</span>
         </v-flex>
-        <v-flex xs1>
-          <v-chip class="check-icon" color="green" text-color="white"><v-icon>check</v-icon></v-chip>
+        <v-flex xs2>
+          <!-- <v-chip class="check-icon" color="green" text-color="white"><v-icon>check</v-icon></v-chip> -->
+          <v-btn @click="$router.push(`/detail/${item.id}`)">View Detail</v-btn>
         </v-flex>
       </v-layout>
     </v-container>
@@ -49,13 +51,38 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      files: {}
+      files: {},
+      filter: ''
     }
   },
   computed: {
     ...mapState([
       'user'
-    ])
+    ]),
+    filteredFiles () {
+      if (this.filter === '') return this.files
+      else {
+        return this.objectFilter(this.files, this.filterFile)
+      }
+    }
+  },
+  methods: {
+    objectFilter (obj, predicate) {
+      let result = {}
+      let key
+
+      for (key in obj) {
+        if (obj.hasOwnProperty(key) && !predicate(obj[key])) {
+          result[key] = obj[key]
+        }
+      }
+
+      return result
+    },
+    filterFile (file) {
+      if (file.name.includes(this.filter)) return false
+      else return true
+    }
   },
   watch: {
     user: {
@@ -69,7 +96,10 @@ export default {
           for (let doc of querySnapshots.docs) {
             this.files = {
               ...this.files,
-              [doc.id]: doc.data()
+              [doc.id]: {
+                ...doc.data(),
+                id: doc.id
+              }
             }
           }
         }
