@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar dark tabs>
+    <v-toolbar dark color="grey darken-4" tabs>
       <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
       <v-toolbar-title>Saungluang Church</v-toolbar-title>
 

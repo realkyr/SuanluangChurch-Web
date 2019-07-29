@@ -2,7 +2,7 @@
   <div>
     <Navbar/>
     <v-container>
-      <h3>Profile Page</h3>
+      <h1>Profile Page</h1>
       <v-flex v-if="user.uid == 'pending'">
         <v-layout style="height: 90vh;" justify-center align-center>
           <v-progress-circular
@@ -11,16 +11,20 @@
           />
         </v-layout>
       </v-flex>
-      <v-flex v-if="user.uid != 'pending'">
-        <v-layout column align-center justify-center>
+      <v-flex v-if="user.uid != 'pending'" style="margin: 10px 0">
+        <v-layout row align-center >
           <v-avatar
             :size="'180px'"
             color="grey lighten-4"
+            style="margin-right: 10px"
           >
           <img :src="user.photoUrl" alt="avatar">
           </v-avatar>
-          <h4>{{ user.dname }}</h4>
-          <v-btn @click="signout">Log Out</v-btn>
+          <v-flex>
+            <h2 style="margin: 6px 8px;">{{ user.dname }}</h2>
+            <v-btn color="primary">Change Profile</v-btn>
+            <v-btn @click="signout">Log Out</v-btn>
+          </v-flex>
         </v-layout>
       </v-flex>
       <FileList />

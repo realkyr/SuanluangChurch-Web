@@ -29,7 +29,7 @@
       </v-layout>
       <v-layout row wrap align-center justify-space-between :key="item.id" v-for="item in filteredFiles">
         <v-flex xs2>
-          <span class="subheader font-weight-medium">{{ item.name }}</span>
+          <span style="word-break: break-word;" class="subheader font-weight-medium">{{ item.name }}</span>
         </v-flex>
         <v-flex xs4>
           <span class="subheader">{{ item.uploaded_date ? item.uploaded_date : 'unknown' }}</span>

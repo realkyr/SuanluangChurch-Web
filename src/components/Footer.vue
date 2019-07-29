@@ -1,24 +1,47 @@
 <template>
   <v-footer
-    dark
-    height="auto"
+    color="grey darken-3"
+    padless
   >
-    <v-card
-      style="background-color: #151515;"
-      flat
-      tile
-      class="dark lighten-1 white--text text-xs-center"
+    <v-layout
+      justify-center
+      wrap
     >
-
-      <v-card-text class="white--text">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </v-card-text>
-
-      <v-divider></v-divider>
-
-      <v-card-text class="white--text">
-        &copy;2019 — <strong>Suanluang Church</strong>
-      </v-card-text>
-    </v-card>
+      <v-btn
+        v-for="link in links"
+        :key="link"
+        color="white"
+        text
+        rounded
+        class="my-2"
+      >
+        {{ link }}
+      </v-btn>
+      <v-flex
+        grey
+        darken-4
+        py-4
+        text-center
+        white--text
+        xs12
+      >
+        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+      </v-flex>
+    </v-layout>
   </v-footer>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    links: [
+      'Home',
+      'About Us',
+      'Team',
+      'Services',
+      'Blog',
+      'Contact Us'
+    ]
+  })
+}
+</script>
