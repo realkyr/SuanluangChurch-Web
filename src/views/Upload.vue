@@ -65,11 +65,12 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
-import Navbar from '@/components/Navbar'
 import { mapState } from 'vuex'
 import { setTimeout } from 'timers'
 
 import moment from 'moment'
+
+const Navbar = () => import('@/components/Navbar')
 
 export default {
   components: {

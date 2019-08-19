@@ -35,11 +35,11 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import FileList from '@/components/Profile/FileList'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+const FileList = () => import('@/components/Profile/FileList')
+const Navbar = () => import('@/components/Navbar')
+const Footer = () => import('@/components/Footer')
 
 export default {
   components: {

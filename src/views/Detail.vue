@@ -7,8 +7,8 @@
 
 <script>
 import { mapActions } from 'vuex'
-import Navbar from '../components/Navbar'
-import File from '../components/File/File'
+const Navbar = () => import('../components/Navbar')
+const File = () => import('../components/File/File')
 
 export default {
   components: {

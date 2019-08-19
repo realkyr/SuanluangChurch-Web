@@ -47,9 +47,9 @@
 // import firebase from 'firebase'
 // import 'firebase/auth'
 
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import FacebookLogin from '@/components/LoginPage/FacebookLogin'
+const Navbar = () => import('@/components/Navbar')
+const Footer = () => import('@/components/Footer')
+const FacebookLogin = () => import('@/components/LoginPage/FacebookLogin')
 
 export default {
   components: {
