@@ -21,7 +21,7 @@
           <span class="subtitle-1">{{ file.size }} bytes</span>
         </v-layout>
         <v-layout column align-center class="file-info" justify-center xs4>
-          <span class="headline">Uploaded File</span>
+          <span class="headline">Uploaded Date</span>
           <span class="subtitle-1">{{ file.uploaded_date }}</span>
         </v-layout>
         <v-layout column align-center class="file-info" justify-center xs4>

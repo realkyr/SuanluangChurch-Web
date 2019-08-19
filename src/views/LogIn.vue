@@ -2,7 +2,7 @@
   <div>
     <Navbar/>
     <v-container>
-      <v-layout style="height: 60vh;" justify-center align-center>
+      <v-layout style="height: 80vh;" justify-center align-center>
         <v-flex xs12 sm10 md8>
           <v-card class="login-card">
             <!-- <h4 class="display-2 font-weight-medium">เข้าสู่ระบบ</h4> -->
@@ -34,7 +34,7 @@
             </div>
             <!-- <v-btn @click="anonymousSignIn" style="width: 100%">เข้าสู่ระบบชั่วคราว</v-btn> -->
             <FacebookLogin />
-            <a>เงื่อนไขการใช้งาน</a>
+            <router-link tag="a" to="/privacy">เงื่อนไขการใช้งาน</router-link>
           </v-card>
         </v-flex>
       </v-layout>

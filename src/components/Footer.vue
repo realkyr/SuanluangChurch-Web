@@ -14,6 +14,7 @@
         text
         rounded
         class="my-2"
+        @click="toPage(link)"
       >
         {{ link }}
       </v-btn>
@@ -40,8 +41,14 @@ export default {
       'Team',
       'Services',
       'Blog',
-      'Contact Us'
+      'Contact Us',
+      'Privacy'
     ]
-  })
+  }),
+  methods: {
+    toPage (link) {
+      this.$router.push(`${link.toLowerCase().replace(/\s+/g, '')}`)
+    }
+  }
 }
 </script>

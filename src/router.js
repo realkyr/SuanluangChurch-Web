@@ -6,6 +6,7 @@ import Profile from './views/Profile.vue'
 import Upload from './views/Upload.vue'
 import Detail from './views/Detail.vue'
 import File from './views/File.vue'
+import Policy from './views/PrivacyPolicy.vue'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
       path: '/file/:uid/:fileid',
       name: 'file',
       component: File
+    },
+    {
+      path: '/privacy',
+      name: 'policy',
+      component: Policy
     }
   ]
 })
