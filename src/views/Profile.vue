@@ -37,7 +37,8 @@
 import { mapActions, mapState } from 'vuex'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-const FileList = () => import('@/components/Profile/FileList')
+import FileList from '@/components/Profile/FileList'
+
 const Navbar = () => import('@/components/Navbar')
 const Footer = () => import('@/components/Footer')
 
