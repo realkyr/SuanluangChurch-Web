@@ -27,7 +27,15 @@
           <span class="title">View Detail</span>
         </v-flex>
       </v-layout>
-      <v-layout row wrap align-center justify-space-between :key="item.id" v-for="item in filteredFiles">
+      <v-layout
+        row
+        wrap
+        align-center
+        justify-space-between
+        :key="item.id"
+        v-for="(item, item_id, index) in filteredFiles"
+        :style="{ background: index % 2 !== 0 ? 'white' : '#B0BEC5' }"
+      >
         <v-flex xs2>
           <span style="word-break: break-word;" class="subheader font-weight-medium">{{ item.name }}</span>
         </v-flex>
