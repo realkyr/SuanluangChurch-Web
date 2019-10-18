@@ -31,6 +31,7 @@
       </v-layout>
       <v-layout column align-center>
         <img style="width: 200px; margin-bottom: 10px" v-if="!url.error" :src="this.url"/>
+        <div id="withlogo"></div>
         <h3 v-if="url.error">{{ url.error }}</h3>
         <v-btn outlined color="error" @click="overlay = !overlay">Delete File</v-btn>
       </v-layout>
@@ -58,6 +59,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
 import { mapState } from 'vuex'
+import watermark from 'watermarkjs'
 
 export default {
   data () {
@@ -114,6 +116,16 @@ export default {
             if (this.file.qrcode) {
               if (this.file.qrcode_link) {
                 this.url = this.file.qrcode_link
+                console.log('อิหยังวะ')
+                console.log(watermark)
+                const options = {
+                  init (img) {
+                    img.crossOrigin = 'anonymous'
+                  }
+                }
+                watermark([this.url, require('../../assets/church.png')], options)
+                  .image(watermark.image.lowerRight(0.5))
+                  .then(img => document.getElementById('withlogo').appendChild(img))
               } else {
                 const storage = firebase.storage()
                 const pathReference = storage.ref(this.file.qrcode)
@@ -123,6 +135,9 @@ export default {
                     qrcode_link: url
                   }, { merge: true })
                   this.url = url
+                  console.log('อิหยังวะ')
+                  const imglogo = await watermark([this.url, '../../assets/church.png']).image(Watermark.image.lowerRight(0.5))
+                  console.log(imglogo)
                 } catch (err) {
                   this.url = { error: 'qrcode unavaiable' }
                 }
